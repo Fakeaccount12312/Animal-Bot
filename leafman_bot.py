@@ -4,6 +4,7 @@ import csv
 from synonyms import synonyms
 from tokens import tokens
 from datetime import datetime
+import os
 
 token = tokens["leafman-bot"]
 
@@ -53,6 +54,9 @@ async def on_message(message):
             await postimage(message.channel, data[synonyms[animal]][0] + random.choice(data[synonyms[animal]]), title="A random " + animal)
         elif msg == "-human":
             await postimage(message.channel, "https://m.media-amazon.com/images/M/MV5BOTIyODY1OTYtZjAzNS00ZGQ2LWFhNmItMTJkYTc0MDNkYTk0XkEyXkFqcGdeQXVyODg3NTgyODQ@._V1_.jpg")
+        elif msg == "-update" and message.author.name == "Fakeaccount1231":
+            await message.channel.send(embed=discord.Embed(title="updating..."))
+            os.system("sh update.sh &")
         elif msg == "-stop" and message.author.name == "Fakeaccount1231":
             await message.channel.send(embed=discord.Embed(title="Bot stopped"))
             exit()
