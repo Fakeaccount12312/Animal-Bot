@@ -8,26 +8,26 @@ fails = 0
 
 print("Started extracting at " + datetime.now().strftime("the %d.%m.%y at %H:%M:%S"))
 
-for animal in (("bear", "bears"), ("bird", "birds"), ("cat", "cats"), ("chameleon", "chameleons"), ("cheetah", "cheetahs"), ("chicken", "chickens"), ("cow", "cows"), ("deer", "deer", "deers"), ("dog", "dog", "dogs"), ("duck", "ducks"), ("elephant", "elephants"), ("ferret", "ferrets"), ("fish", "fish"), ("fox", "foxes"), ("frog", "frogs"), ("giraffe", "giraffes"), ("guinea pig", "guinea-pigs"), ("hamster", "hamster"), ("hedgehog", "hedgehogs"), ("horse", "horses"), ("kangaroo", "kangaroos"), ("koala", "koalas"), ("leopard", "leopards"), ("lion", "lions"), ("meerkat", "meerkats"), ("mouse", "mice"), ("orangutan", "orangutans"), ("otter", "otters"), ("owl", "owls"), ("panda", "pandas"), ("penguin", "penguins"), ("pig", "pigs"), ("polar bear", "polar-bears"), ("rabbit", "rabbits"), ("red panda", "red-pandas"), ("seal", "seals"), ("sheep", "sheep"), ("sloth", "slothes"), ("squirrel", "squirrels"), ("tiger", "tigers"), ("turtle", "tortoises")):
-    row = []
-    for tag in animal[1:]:
-        website = requests.get("http://www.cutestpaw.com/tag/" + tag + "/").content
-        pages = int(re.findall(r"Page 1 of (\d+)", str(website))[0])
-        for pageindex in range(pages):
-            print("Scraping page " + str(pageindex + 1) + " of " + str(pages) + " for " + tag)
-            website = requests.get("http://www.cutestpaw.com/tag/" + tag + "/page/" + str(pageindex + 1) + "/").content
-            website = bs4.BeautifulSoup(website, "html5lib")
-            images = website.find(id="photos")
-            images = images.find_all("img")
-            for image in images:
-                # ensure that the image url cosists only of ascii to avoid errors
-                try:
-                    image_src = image["src"][len("http://www.cutestpaw.com/wp-content/uploads/"):]
-                    asd = image_src.encode("ascii", "strict")
-                    row.append(image_src)
-                except:
-                    fails += 1
-    data.append([animal[0], "http://www.cutestpaw.com/wp-content/uploads/"] + row)
+# for animal in (("bear", "bears"), ("bird", "birds"), ("cat", "cats"), ("chameleon", "chameleons"), ("cheetah", "cheetahs"), ("chicken", "chickens"), ("cow", "cows"), ("deer", "deer", "deers"), ("dog", "dog", "dogs"), ("duck", "ducks"), ("elephant", "elephants"), ("ferret", "ferrets"), ("fish", "fish"), ("fox", "foxes"), ("frog", "frogs"), ("giraffe", "giraffes"), ("guinea pig", "guinea-pigs"), ("hamster", "hamster"), ("hedgehog", "hedgehogs"), ("horse", "horses"), ("kangaroo", "kangaroos"), ("koala", "koalas"), ("leopard", "leopards"), ("lion", "lions"), ("meerkat", "meerkats"), ("mouse", "mice"), ("orangutan", "orangutans"), ("otter", "otters"), ("owl", "owls"), ("panda", "pandas"), ("penguin", "penguins"), ("pig", "pigs"), ("polar bear", "polar-bears"), ("rabbit", "rabbits"), ("red panda", "red-pandas"), ("seal", "seals"), ("sheep", "sheep"), ("sloth", "slothes"), ("squirrel", "squirrels"), ("tiger", "tigers"), ("turtle", "tortoises")):
+#     row = []
+#     for tag in animal[1:]:
+#         website = requests.get("http://www.cutestpaw.com/tag/" + tag + "/").content
+#         pages = int(re.findall(r"Page 1 of (\d+)", str(website))[0])
+#         for pageindex in range(pages):
+#             print("Scraping page " + str(pageindex + 1) + " of " + str(pages) + " for " + tag)
+#             website = requests.get("http://www.cutestpaw.com/tag/" + tag + "/page/" + str(pageindex + 1) + "/").content
+#             website = bs4.BeautifulSoup(website, "html5lib")
+#             images = website.find(id="photos")
+#             images = images.find_all("img")
+#             for image in images:
+#                 # ensure that the image url cosists only of ascii to avoid errors
+#                 try:
+#                     image_src = image["src"][len("http://www.cutestpaw.com/wp-content/uploads/"):]
+#                     asd = image_src.encode("ascii", "strict")
+#                     row.append(image_src)
+#                 except:
+#                     fails += 1
+#     data.append([animal[0], "http://www.cutestpaw.com/wp-content/uploads/"] + row)
 
 row = []
 
@@ -51,8 +51,8 @@ for page in range(1, 5):
     images = website.find(class_="thumb-container-big").parent
     images = images.find_all("img")
     for image in images:
-        if "user-avatar" not in image["class"]:
-            row.append(image["data-src"])
+        if image["alt"]:
+            row.append(image["src"])
 
 data.append(["rhino", ""] + row)
 
