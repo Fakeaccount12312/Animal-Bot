@@ -1,7 +1,6 @@
 import requests, bs4, re
 import csv, os
 from datetime import datetime
-from time import sleep
 
 data = [["animal", "urlstart", "images"]]
 row = []

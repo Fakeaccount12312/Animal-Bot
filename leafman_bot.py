@@ -2,9 +2,10 @@ import discord
 import random
 import csv
 from synonyms import synonyms
+from tokens import tokens
 from datetime import datetime
 
-token = 'NzMyMjkyODY3ODYyODIyOTMy.XwyfBQ.dz2gKFXs-VAQg5WjOin7cv45Lkw'
+token = tokens["leafman-bot"]
 
 data = {}
 with open("imageurls.csv", "r", newline="") as f:
