@@ -44,7 +44,7 @@ data.append(["spider", "http://www.findaspider.org.au/find/spiders/images/"] + r
 
 row = []
 
-for page in range(1, 5):
+for page in range(1, 6):
     print("Scraping page " + str(page) + " of 5 for rhinos")
     website = requests.get("https://wall.alphacoders.com/by_sub_category.php?id=174594&name=Rhino+Wallpapers&page=" + str(page)).content
     website = bs4.BeautifulSoup(website, "html5lib")
@@ -76,4 +76,4 @@ with open("imageurls.csv", "w", newline="") as f:
 print("Images extracted at the " + datetime.now().strftime("the %d.%m.%y at %H:%M:%S. ") + "Failed to resolve urls " + str(fails) + " times.")
 
 if os.name != "nt":
-    os.system("update.sh &")
+    os.system("sh update.sh &")

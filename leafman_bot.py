@@ -12,9 +12,9 @@ with open("imageurls.csv", "r", newline="") as f:
     reader = csv.reader(f)
     for row in reader:
         data[row[0]] = row[1:]
-data.pop("animal")
-data.pop("cat")
-data.pop("dog")
+# data.pop("animal")
+# data.pop("cat")
+# data.pop("dog")
 
 client = discord.Client()
 
