@@ -13,7 +13,7 @@ with open("imageurls.csv", "r", newline="") as f:
     reader = csv.reader(f)
     for row in reader:
         data[row[0]] = row[1:]
-# data.pop("animal")
+data.pop("animal")
 # data.pop("cat")
 # data.pop("dog")
 
@@ -23,7 +23,7 @@ supported_animals = ", ".join(sorted(list(data.keys()) + ["random"]))
 
 
 async def postimage(channel, imageurl, title=None, description=None):
-    # print(imageurl, title, description, type(imageurl))
+    #print(imageurl, title, description, type(imageurl))
     embedded = discord.Embed(title=title, description=description)
     embedded.set_image(url=imageurl)
     await channel.send(embed=embedded)
