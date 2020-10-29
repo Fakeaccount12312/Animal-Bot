@@ -76,11 +76,4 @@ with open("imageurls.csv", "w", newline="") as f:
 print("Images extracted at the " + datetime.now().strftime("the %d.%m.%y at %H:%M:%S. ") + "Failed to resolve urls " + str(fails) + " times.")
 
 if os.name != "nt":
-    os.system("pkill -f bot.py")
-    os.system("pkill -f leafman_bot.py")
-
-    os.system("sleep 1m")
-
-    os.system("python3 bot.py -u &>> log.txt &")
-    os.system("sleep 10s")
-    os.system("python3 leafman_bot.py -u &>> log.txt &")
+    os.system("update.sh &")
